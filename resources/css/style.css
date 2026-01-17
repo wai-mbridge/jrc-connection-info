@@ -1,0 +1,16 @@
+.root {
+    -fx-font-family: "Yu Gothic";
+    -fx-font-size: 12px;
+}
+
+.table-view {
+    -fx-border-width: 0;
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+}
+
+.table-view:focused {
+    -fx-border-width: 0;
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+}
