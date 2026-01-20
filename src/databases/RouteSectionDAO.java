@@ -23,31 +23,31 @@ public class RouteSectionDAO extends BasicDAO<RouteSection> {
     @Override
     protected RouteSection map(ResultSet rs) throws SQLException {
         RouteSection r = new RouteSection();
-        r.setID(rs.getInt("ID"));
-        r.setSequence(rs.getInt("sequence"));
+        r.setId(rs.getInt("id"));
+        r.setPosition(rs.getInt("position"));
         r.setName(rs.getString("name"));
-        r.setShort_name(rs.getString("short_name"));
-        r.setTimetable_format(rs.getString("timetable_format"));
-        r.setTimetable_diagram(rs.getString("timetable_diagram"));
-        r.setTimetable_page_layout(rs.getString("timetable_page_layout"));
+        r.setLetter(rs.getString("letter"));
+        r.setTimetable_format_type(rs.getInt("timetable_format_type"));
+        r.setTimetable_day_type(rs.getInt("timetable_day_type"));
+        r.setTimetable_layout_type(rs.getInt("timetable_layout_type"));
         r.setUploaded_at(rs.getString("uploaded_at"));
-        r.setTimetable_revision_version(rs.getString("timetable_revision_version"));
-        r.setTimetable_revision_date(rs.getString("timetable_revision_date"));
+        r.setTimetable_version(rs.getString("timetable_version"));
+        r.setTimetable_updated(rs.getString("timetable_updated"));
         return r;
     }
 
     @Override
     protected Map<String, Object> toMap(RouteSection rs) {
         Map<String, Object> map = new LinkedHashMap<>();
-        map.put("sequence", rs.getSequence());
+        map.put("position", rs.getPosition());
         map.put("name", rs.getName());
-        map.put("short_name", rs.getShort_name());
-        map.put("timetable_format", rs.getTimetable_format());
-        map.put("timetable_diagram", rs.getTimetable_diagram());
-        map.put("timetable_page_layout", rs.getTimetable_page_layout());
-        map.put("timetable_revision_version", rs.getTimetable_revision_version());
-        map.put("timetable_revision_date", rs.getTimetable_revision_date());
+        map.put("letter", rs.getLetter());
+        map.put("timetable_format_type", rs.getTimetable_format_type());
+        map.put("timetable_day_type", rs.getTimetable_day_type());
+        map.put("timetable_layout_type", rs.getTimetable_layout_type());
         map.put("uploaded_at", rs.getUploaded_at());
+        map.put("timetable_version", rs.getTimetable_version());
+        map.put("timetable_updated", rs.getTimetable_updated());
         return map;
     }
 

@@ -22,15 +22,15 @@ public class TrainDAO extends BasicDAO<Train> {
     @Override
     protected Train map(ResultSet rs) throws SQLException {
         Train t = new Train();
-        t.setID(rs.getInt("ID"));
+        t.setId(rs.getInt("id"));
         t.setRoute_section_id(rs.getInt("route_section_id"));
         t.setTrain_number(rs.getString("train_number"));
-        t.setWeekday_holiday_type(rs.getString("weekday_holiday_type"));
-        t.setUp_down_type(rs.getString("up_down_type"));
-        t.setTrain_type(rs.getString("train_type"));
-        t.setStart_station(rs.getString("start_station"));
-        t.setEnd_station(rs.getString("end_station"));
-        t.setRemark(rs.getString("remark"));
+        t.setBound_type(rs.getInt("bound_type"));
+        t.setDay_type(rs.getInt("day_type"));
+        t.setTrain_type(rs.getInt("train_type"));
+        t.setFirst_station(rs.getString("first_station"));
+        t.setLast_station(rs.getString("last_station"));
+        t.setSupplement(rs.getString("supplement"));
         return t;
     }
 
@@ -39,12 +39,13 @@ public class TrainDAO extends BasicDAO<Train> {
         Map<String, Object> map = new LinkedHashMap<>();
         map.put("route_section_id", t.getRoute_section_id());
         map.put("train_number", t.getTrain_number());
-        map.put("weekday_holiday_type", t.getWeekday_holiday_type());
-        map.put("up_down_type", t.getUp_down_type());
+        map.put("bound_type", t.getBound_type());
+        map.put("day_type", t.getDay_type());
         map.put("train_type", t.getTrain_type());
-        map.put("start_station", t.getStart_station());
-        map.put("end_station", t.getEnd_station());
-        map.put("remark", t.getRemark());
+        map.put("first_station", t.getFirst_station());
+        map.put("last_station", t.getLast_station());
+        map.put("supplement", t.getSupplement());
         return map;
     }
+
 }

@@ -2,13 +2,13 @@ package models;
 
 public class CourseTrain {
 
-    private int ID;
+    private int id;
     private int course_id;
+    private int position;
     private String train_number;
-    private int sequence;
-    private String crew_type;
-    private String direct_source_train_number;
-    private String direct_destination__train_number;
+    private int crew_type;
+    private String direct_from;
+    private String direct_to;
 
     private Course course;
 
@@ -16,16 +16,17 @@ public class CourseTrain {
         super();
     }
 
-    public CourseTrain(int iD, int course_id, String train_number, int sequence, String crew_type,
-            String direct_source_train_number, String direct_destination__train_number) {
+    public CourseTrain(int id, int course_id, int position, String train_number, int crew_type, String direct_from,
+            String direct_to, Course course) {
         super();
-        ID = iD;
+        this.id = id;
         this.course_id = course_id;
+        this.position = position;
         this.train_number = train_number;
-        this.sequence = sequence;
         this.crew_type = crew_type;
-        this.direct_source_train_number = direct_source_train_number;
-        this.direct_destination__train_number = direct_destination__train_number;
+        this.direct_from = direct_from;
+        this.direct_to = direct_to;
+        this.course = course;
     }
 
     public Course getCourse() {
@@ -36,12 +37,12 @@ public class CourseTrain {
         this.course = course;
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public void setID(int iD) {
-        ID = iD;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getCourse_id() {
@@ -52,6 +53,14 @@ public class CourseTrain {
         this.course_id = course_id;
     }
 
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
     public String getTrain_number() {
         return train_number;
     }
@@ -60,36 +69,28 @@ public class CourseTrain {
         this.train_number = train_number;
     }
 
-    public int getSequence() {
-        return sequence;
-    }
-
-    public void setSequence(int sequence) {
-        this.sequence = sequence;
-    }
-
-    public String getCrew_type() {
+    public int getCrew_type() {
         return crew_type;
     }
 
-    public void setCrew_type(String crew_type) {
+    public void setCrew_type(int crew_type) {
         this.crew_type = crew_type;
     }
 
-    public String getDirect_source_train_number() {
-        return direct_source_train_number;
+    public String getDirect_from() {
+        return direct_from;
     }
 
-    public void setDirect_source_train_number(String direct_source_train_number) {
-        this.direct_source_train_number = direct_source_train_number;
+    public void setDirect_from(String direct_from) {
+        this.direct_from = direct_from;
     }
 
-    public String getDirect_destination__train_number() {
-        return direct_destination__train_number;
+    public String getDirect_to() {
+        return direct_to;
     }
 
-    public void setDirect_destination__train_number(String direct_destination__train_number) {
-        this.direct_destination__train_number = direct_destination__train_number;
+    public void setDirect_to(String direct_to) {
+        this.direct_to = direct_to;
     }
 
 }

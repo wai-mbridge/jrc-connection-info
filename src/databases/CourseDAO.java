@@ -22,18 +22,24 @@ public class CourseDAO extends BasicDAO<Course> {
 
     @Override
     protected Course map(ResultSet rs) throws SQLException {
-        return new Course(rs.getInt("ID"), rs.getString("weekday_holiday_type"), rs.getString("route_day_of_week"),
-                rs.getString("route_number"), rs.getString("plan_name"), rs.getString("issue_date"),
-                rs.getString("uploaded_at"));
+        Course c = new Course();
+        c.setId(rs.getInt("ID"));
+        c.setDay_type(rs.getInt("day_type"));
+        c.setDay_code(rs.getString("day_code"));
+        c.setCourse_number(rs.getString("course_number"));
+        c.setIssue(rs.getString("issue"));
+        c.setIssue_date(rs.getString("issue_date"));
+        c.setUploaded_at(rs.getString("uploaded_at"));
+        return c;
     }
 
     @Override
     protected Map<String, Object> toMap(Course course) {
         Map<String, Object> map = new LinkedHashMap<>();
-        map.put("weekday_holiday_type", course.getWeekday_holiday_type());
-        map.put("route_day_of_week", course.getRoute_day_of_week());
-        map.put("route_number", course.getRoute_number());
-        map.put("plan_name", course.getPlan_name());
+        map.put("day_type", course.getDay_type());
+        map.put("day_code", course.getDay_code());
+        map.put("course_number", course.getCourse_number());
+        map.put("issue", course.getIssue());
         map.put("issue_date", course.getIssue_date());
         map.put("uploaded_at", course.getUploaded_at());
         return map;

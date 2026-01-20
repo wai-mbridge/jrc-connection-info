@@ -23,10 +23,10 @@ public class StationSettingDAO extends BasicDAO<StationSetting> {
     @Override
     protected StationSetting map(ResultSet rs) throws SQLException {
         StationSetting s = new StationSetting();
-        s.setID(rs.getInt("ID"));
+        s.setId(rs.getInt("id"));
         s.setStation_name(rs.getString("station_name"));
-        s.setConnection_grace_time(rs.getInt("connection_grace_time"));
-        s.setConnection_extract_count(rs.getInt("connection_extract_count"));
+        s.setDuration(rs.getInt("duration"));
+        s.setExtraction(rs.getInt("extraction"));
         return s;
     }
 
@@ -34,8 +34,8 @@ public class StationSettingDAO extends BasicDAO<StationSetting> {
     protected Map<String, Object> toMap(StationSetting s) {
         Map<String, Object> map = new LinkedHashMap<>();
         map.put("station_name", s.getStation_name());
-        map.put("connection_grace_time", s.getConnection_grace_time());
-        map.put("connection_extract_count", s.getConnection_extract_count());
+        map.put("duration", s.getDuration());
+        map.put("extraction", s.getExtraction());
         return map;
     }
 

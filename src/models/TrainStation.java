@@ -1,14 +1,14 @@
 package models;
 
 public class TrainStation {
-    private int ID;
+    private int id;
     private int train_id;
-    private String station_number;
+    private int station_position;
     private String station_name;
     private String arrival_time;
     private String departure_time;
     private String platform;
-    private String stop_type;
+    private int stop_type;
 
     private Train train;
 
@@ -16,17 +16,18 @@ public class TrainStation {
         super();
     }
 
-    public TrainStation(int iD, int train_id, String station_number, String station_name, String arrival_time,
-            String departure_time, String platform, String stop_type) {
+    public TrainStation(int id, int train_id, int station_position, String station_name, String arrival_time,
+            String departure_time, String platform, int stop_type, Train train) {
         super();
-        ID = iD;
+        this.id = id;
         this.train_id = train_id;
-        this.station_number = station_number;
+        this.station_position = station_position;
         this.station_name = station_name;
         this.arrival_time = arrival_time;
         this.departure_time = departure_time;
         this.platform = platform;
         this.stop_type = stop_type;
+        this.train = train;
     }
 
     public Train getTrain() {
@@ -37,12 +38,12 @@ public class TrainStation {
         this.train = train;
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public void setID(int iD) {
-        ID = iD;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getTrain_id() {
@@ -53,12 +54,12 @@ public class TrainStation {
         this.train_id = train_id;
     }
 
-    public String getStation_number() {
-        return station_number;
+    public int getStation_position() {
+        return station_position;
     }
 
-    public void setStation_number(String station_number) {
-        this.station_number = station_number;
+    public void setStation_position(int station_position) {
+        this.station_position = station_position;
     }
 
     public String getStation_name() {
@@ -93,11 +94,11 @@ public class TrainStation {
         this.platform = platform;
     }
 
-    public String getStop_type() {
+    public int getStop_type() {
         return stop_type;
     }
 
-    public void setStop_type(String stop_type) {
+    public void setStop_type(int stop_type) {
         this.stop_type = stop_type;
     }
 

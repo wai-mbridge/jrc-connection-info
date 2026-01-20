@@ -1,28 +1,28 @@
 package models;
 
 public class StationSetting {
-    private int ID;
+    private int id;
     private String station_name;
-    private int connection_grace_time;
-    private int connection_extract_count;
+    private int duration;
+    private int extraction;
 
     public StationSetting() {
         super();
     }
 
-    public StationSetting(String station_name, int connection_grace_time, int connection_extract_count) {
+    public StationSetting(String station_name, int duration, int extraction) {
         super();
         this.station_name = station_name;
-        this.connection_grace_time = connection_grace_time;
-        this.connection_extract_count = connection_extract_count;
+        this.duration = duration;
+        this.extraction = extraction;
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public void setID(int iD) {
-        ID = iD;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getStation_name() {
@@ -33,20 +33,20 @@ public class StationSetting {
         this.station_name = station_name;
     }
 
-    public int getConnection_grace_time() {
-        return connection_grace_time;
+    public int getDuration() {
+        return duration;
     }
 
-    public void setConnection_grace_time(int connection_grace_time) {
-        this.connection_grace_time = connection_grace_time;
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
-    public int getConnection_extract_count() {
-        return connection_extract_count;
+    public int getExtraction() {
+        return extraction;
     }
 
-    public void setConnection_extract_count(int connection_extract_count) {
-        this.connection_extract_count = connection_extract_count;
+    public void setExtraction(int extraction) {
+        this.extraction = extraction;
     }
 
 }

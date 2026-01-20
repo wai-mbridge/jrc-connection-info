@@ -60,9 +60,8 @@ public class StationManagementController {
 
             // Write data
             for (StationSetting station_setting : station_setting_list) {
-                writer.append(station_setting.getStation_name() + ",")
-                        .append(station_setting.getConnection_grace_time() + ",")
-                        .append(station_setting.getConnection_extract_count() + "\n");
+                writer.append(station_setting.getStation_name() + ",").append(station_setting.getDuration() + ",")
+                        .append(station_setting.getExtraction() + "\n");
             }
 
             writer.flush();

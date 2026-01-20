@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +50,8 @@ public abstract class BasicDAO<T> {
         return query("SELECT * FROM " + tableName() + " WHERE " + column + " = ?", value);
     }
 
-    public void insert(Map<String, Object> data) throws SQLException {
+    public int insert(T item) throws SQLException {
+        Map<String, Object> data = toMap(item); // Convert your object to map of columns and values
         StringJoiner cols = new StringJoiner(",");
         StringJoiner qs = new StringJoiner(",");
         List<Object> params = new ArrayList<>();
@@ -61,7 +63,24 @@ public abstract class BasicDAO<T> {
         });
 
         String sql = "INSERT INTO " + tableName() + " (" + cols + ") VALUES (" + qs + ")";
-        execute(sql, params);
+
+        try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            // Bind parameters
+            for (int i = 0; i < params.size(); i++) {
+                ps.setObject(i + 1, params.get(i));
+            }
+
+            ps.executeUpdate();
+
+            // Get generated ID
+            try (ResultSet keys = ps.getGeneratedKeys()) {
+                if (keys.next()) {
+                    return keys.getInt(1);
+                }
+            }
+        }
+
+        return -1;
     }
 
     public void insertAll(List<T> items) throws SQLException {

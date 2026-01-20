@@ -1,8 +1,10 @@
 package views;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 import controllers.TimetableManagementController;
@@ -47,20 +49,19 @@ public class TimetableManagementView {
         name_col.setCellValueFactory(new PropertyValueFactory<>("name"));
         name_col.setPrefWidth(200);
 
-        TableColumn<RouteSection, String> timetable_revision_date_col = new TableColumn<>("改正日");
-        timetable_revision_date_col.setCellValueFactory(new PropertyValueFactory<>("timetable_revision_date"));
-        timetable_revision_date_col.setPrefWidth(100);
+        TableColumn<RouteSection, String> timetable_updated_col = new TableColumn<>("改正日");
+        timetable_updated_col.setCellValueFactory(new PropertyValueFactory<>("timetable_updated"));
+        timetable_updated_col.setPrefWidth(100);
 
-        TableColumn<RouteSection, String> timetable_revision_version_col = new TableColumn<>("改正版");
-        timetable_revision_version_col.setCellValueFactory(new PropertyValueFactory<>("timetable_revision_version"));
-        timetable_revision_version_col.setPrefWidth(50);
+        TableColumn<RouteSection, String> timetable_version_col = new TableColumn<>("改正版");
+        timetable_version_col.setCellValueFactory(new PropertyValueFactory<>("timetable_version"));
+        timetable_version_col.setPrefWidth(50);
 
         TableColumn<RouteSection, String> uploaded_at_col = new TableColumn<>("アップロード日");
         uploaded_at_col.setCellValueFactory(new PropertyValueFactory<>("uploaded_at"));
         uploaded_at_col.setPrefWidth(150);
 
-        tableView.getColumns().addAll(
-                List.of(name_col, timetable_revision_date_col, timetable_revision_version_col, uploaded_at_col));
+        tableView.getColumns().addAll(List.of(name_col, timetable_updated_col, timetable_version_col, uploaded_at_col));
 
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
 
@@ -91,7 +92,12 @@ public class TimetableManagementView {
             List<File> selectedFiles = fileChooser.showOpenMultipleDialog(stage);
             if (selectedFiles != null && !selectedFiles.isEmpty()) {
                 for (File file : selectedFiles) {
-                    controller.readData();
+                    try {
+                        controller.extract(file);
+                    } catch (IOException | SQLException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
                 }
 
                 // refresh

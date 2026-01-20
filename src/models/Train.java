@@ -3,15 +3,16 @@ package models;
 import java.util.List;
 
 public class Train {
-    private int ID;
+
+    private int id;
     private int route_section_id;
     private String train_number;
-    private String weekday_holiday_type;
-    private String up_down_type;
-    private String train_type;
-    private String start_station;
-    private String end_station;
-    private String remark;
+    private int bound_type;
+    private int day_type;
+    private int train_type;
+    private String first_station;
+    private String last_station;
+    private String supplement;
 
     private RouteSection route_section;
     private List<TrainStation> train_stations;
@@ -20,18 +21,21 @@ public class Train {
         super();
     }
 
-    public Train(int iD, int route_section_id, String train_number, String weekday_holiday_type, String up_down_type,
-            String train_type, String start_station, String end_station, String remark) {
+    public Train(int id, int route_section_id, String train_number, int bound_type, int day_type, int train_type,
+            String first_station, String last_station, String supplement, RouteSection route_section,
+            List<TrainStation> train_stations) {
         super();
-        ID = iD;
+        this.id = id;
         this.route_section_id = route_section_id;
         this.train_number = train_number;
-        this.weekday_holiday_type = weekday_holiday_type;
-        this.up_down_type = up_down_type;
+        this.bound_type = bound_type;
+        this.day_type = day_type;
         this.train_type = train_type;
-        this.start_station = start_station;
-        this.end_station = end_station;
-        this.remark = remark;
+        this.first_station = first_station;
+        this.last_station = last_station;
+        this.supplement = supplement;
+        this.route_section = route_section;
+        this.train_stations = train_stations;
     }
 
     public RouteSection getRoute_section() {
@@ -50,12 +54,12 @@ public class Train {
         this.train_stations = train_stations;
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public void setID(int iD) {
-        ID = iD;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getRoute_section_id() {
@@ -74,52 +78,52 @@ public class Train {
         this.train_number = train_number;
     }
 
-    public String getWeekday_holiday_type() {
-        return weekday_holiday_type;
+    public int getBound_type() {
+        return bound_type;
     }
 
-    public void setWeekday_holiday_type(String weekday_holiday_type) {
-        this.weekday_holiday_type = weekday_holiday_type;
+    public void setBound_type(int bound_type) {
+        this.bound_type = bound_type;
     }
 
-    public String getUp_down_type() {
-        return up_down_type;
+    public int getDay_type() {
+        return day_type;
     }
 
-    public void setUp_down_type(String up_down_type) {
-        this.up_down_type = up_down_type;
+    public void setDay_type(int day_type) {
+        this.day_type = day_type;
     }
 
-    public String getTrain_type() {
+    public int getTrain_type() {
         return train_type;
     }
 
-    public void setTrain_type(String train_type) {
+    public void setTrain_type(int train_type) {
         this.train_type = train_type;
     }
 
-    public String getStart_station() {
-        return start_station;
+    public String getFirst_station() {
+        return first_station;
     }
 
-    public void setStart_station(String start_station) {
-        this.start_station = start_station;
+    public void setFirst_station(String first_station) {
+        this.first_station = first_station;
     }
 
-    public String getEnd_station() {
-        return end_station;
+    public String getLast_station() {
+        return last_station;
     }
 
-    public void setEnd_station(String end_station) {
-        this.end_station = end_station;
+    public void setLast_station(String last_station) {
+        this.last_station = last_station;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getSupplement() {
+        return supplement;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setSupplement(String supplement) {
+        this.supplement = supplement;
     }
 
 }

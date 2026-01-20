@@ -3,16 +3,17 @@ package models;
 import java.util.List;
 
 public class RouteSection {
-    private int ID;
-    private int sequence;
+
+    private int id;
+    private int position;
     private String name;
-    private String short_name;
-    private String timetable_format;
-    private String timetable_diagram;
-    private String timetable_page_layout;
+    private String letter;
+    private int timetable_format_type;
+    private int timetable_day_type;
+    private int timetable_layout_type;
     private String uploaded_at;
-    private String timetable_revision_date;
-    private String timetable_revision_version;
+    private String timetable_version;
+    private String timetable_updated;
 
     private List<Train> trains;
 
@@ -20,30 +21,29 @@ public class RouteSection {
         super();
     }
 
-    public RouteSection(int ID, String name, String timetable_revision_version, String timetable_revision_date,
-            String uploaded_at) {
+    public RouteSection(int id, String name, String timetable_version, String timetable_updated, String uploaded_at) {
         super();
-        this.ID = ID;
+        this.id = id;
         this.name = name;
-        this.timetable_revision_version = timetable_revision_version;
-        this.timetable_revision_date = timetable_revision_date;
+        this.timetable_version = timetable_version;
+        this.timetable_updated = timetable_updated;
         this.uploaded_at = uploaded_at;
     }
 
-    public RouteSection(int sequence, String name, String short_name, String timetable_format, String timetable_diagram,
-            String timetable_page_layout, String uploaded_at, String timetable_revision_version,
-            String timetable_revision_date) {
+    public RouteSection(int position, String name, String letter, int timetable_format_type, int timetable_day_type,
+            int timetable_layout_type, String uploaded_at, String timetable_version, String timetable_updated,
+            List<Train> trains) {
         super();
-        this.sequence = sequence;
+        this.position = position;
         this.name = name;
-        this.short_name = short_name;
-        this.timetable_format = timetable_format;
-        this.timetable_diagram = timetable_diagram;
-        this.timetable_page_layout = timetable_page_layout;
+        this.letter = letter;
+        this.timetable_format_type = timetable_format_type;
+        this.timetable_day_type = timetable_day_type;
+        this.timetable_layout_type = timetable_layout_type;
         this.uploaded_at = uploaded_at;
-
-        this.timetable_revision_version = timetable_revision_version;
-        this.timetable_revision_date = timetable_revision_date;
+        this.timetable_version = timetable_version;
+        this.timetable_updated = timetable_updated;
+        this.trains = trains;
     }
 
     public List<Train> getTrains() {
@@ -54,20 +54,20 @@ public class RouteSection {
         this.trains = trains;
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public void setID(int iD) {
-        ID = iD;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getSequence() {
-        return sequence;
+    public int getPosition() {
+        return position;
     }
 
-    public void setSequence(int sequence) {
-        this.sequence = sequence;
+    public void setPosition(int position) {
+        this.position = position;
     }
 
     public String getName() {
@@ -78,36 +78,36 @@ public class RouteSection {
         this.name = name;
     }
 
-    public String getShort_name() {
-        return short_name;
+    public String getLetter() {
+        return letter;
     }
 
-    public void setShort_name(String short_name) {
-        this.short_name = short_name;
+    public void setLetter(String letter) {
+        this.letter = letter;
     }
 
-    public String getTimetable_format() {
-        return timetable_format;
+    public int getTimetable_format_type() {
+        return timetable_format_type;
     }
 
-    public void setTimetable_format(String timetable_format) {
-        this.timetable_format = timetable_format;
+    public void setTimetable_format_type(int timetable_format_type) {
+        this.timetable_format_type = timetable_format_type;
     }
 
-    public String getTimetable_diagram() {
-        return timetable_diagram;
+    public int getTimetable_day_type() {
+        return timetable_day_type;
     }
 
-    public void setTimetable_diagram(String timetable_diagram) {
-        this.timetable_diagram = timetable_diagram;
+    public void setTimetable_day_type(int timetable_day_type) {
+        this.timetable_day_type = timetable_day_type;
     }
 
-    public String getTimetable_page_layout() {
-        return timetable_page_layout;
+    public int getTimetable_layout_type() {
+        return timetable_layout_type;
     }
 
-    public void setTimetable_page_layout(String timetable_page_layout) {
-        this.timetable_page_layout = timetable_page_layout;
+    public void setTimetable_layout_type(int timetable_layout_type) {
+        this.timetable_layout_type = timetable_layout_type;
     }
 
     public String getUploaded_at() {
@@ -118,20 +118,20 @@ public class RouteSection {
         this.uploaded_at = uploaded_at;
     }
 
-    public String getTimetable_revision_date() {
-        return timetable_revision_date;
+    public String getTimetable_version() {
+        return timetable_version;
     }
 
-    public void setTimetable_revision_date(String timetable_revision_date) {
-        this.timetable_revision_date = timetable_revision_date;
+    public void setTimetable_version(String timetable_version) {
+        this.timetable_version = timetable_version;
     }
 
-    public String getTimetable_revision_version() {
-        return timetable_revision_version;
+    public String getTimetable_updated() {
+        return timetable_updated;
     }
 
-    public void setTimetable_revision_version(String timetable_revision_version) {
-        this.timetable_revision_version = timetable_revision_version;
+    public void setTimetable_updated(String timetable_updated) {
+        this.timetable_updated = timetable_updated;
     }
 
 }

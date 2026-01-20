@@ -3,11 +3,12 @@ package models;
 import java.util.List;
 
 public class Course {
-    private int ID;
-    private String weekday_holiday_type;
-    private String route_day_of_week;
-    private String route_number;
-    private String plan_name;
+
+    private int id;
+    private int day_type;
+    private String day_code;
+    private String course_number;
+    private String issue;
     private String issue_date;
     private String uploaded_at;
 
@@ -20,24 +21,27 @@ public class Course {
         super();
     }
 
-    public Course(String route_number, String plan_name, String issue_date, String uploaded_at) {
+    public Course(String course_number, String issue, String issue_date, String uploaded_at) {
         super();
-        this.route_number = route_number;
-        this.plan_name = plan_name;
+        this.course_number = course_number;
+        this.issue = issue;
         this.issue_date = issue_date;
         this.uploaded_at = uploaded_at;
     }
 
-    public Course(int ID, String weekday_holiday_type, String route_day_of_week, String route_number, String plan_name,
-            String issue_date, String uploaded_at) {
+    public Course(int id, int day_type, String day_code, String course_number, String issue, String issue_date,
+            String uploaded_at, boolean headerRow, String headerText, List<CourseTrain> course_trains) {
         super();
-        this.ID = ID;
-        this.weekday_holiday_type = weekday_holiday_type;
-        this.route_day_of_week = route_day_of_week;
-        this.route_number = route_number;
-        this.plan_name = plan_name;
+        this.id = id;
+        this.day_type = day_type;
+        this.day_code = day_code;
+        this.course_number = course_number;
+        this.issue = issue;
         this.issue_date = issue_date;
         this.uploaded_at = uploaded_at;
+        this.headerRow = headerRow;
+        this.headerText = headerText;
+        this.course_trains = course_trains;
     }
 
     public List<CourseTrain> getCourse_trains() {
@@ -48,44 +52,44 @@ public class Course {
         this.course_trains = course_trains;
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public void setID(int iD) {
-        ID = iD;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getWeekday_holiday_type() {
-        return weekday_holiday_type;
+    public int getDay_type() {
+        return day_type;
     }
 
-    public void setWeekday_holiday_type(String weekday_holiday_type) {
-        this.weekday_holiday_type = weekday_holiday_type;
+    public void setDay_type(int day_type) {
+        this.day_type = day_type;
     }
 
-    public String getRoute_day_of_week() {
-        return route_day_of_week;
+    public String getDay_code() {
+        return day_code;
     }
 
-    public void setRoute_day_of_week(String route_day_of_week) {
-        this.route_day_of_week = route_day_of_week;
+    public void setDay_code(String day_code) {
+        this.day_code = day_code;
     }
 
-    public String getRoute_number() {
-        return route_number;
+    public String getCourse_number() {
+        return course_number;
     }
 
-    public void setRoute_number(String route_number) {
-        this.route_number = route_number;
+    public void setCourse_number(String course_number) {
+        this.course_number = course_number;
     }
 
-    public String getPlan_name() {
-        return plan_name;
+    public String getIssue() {
+        return issue;
     }
 
-    public void setPlan_name(String plan_name) {
-        this.plan_name = plan_name;
+    public void setIssue(String issue) {
+        this.issue = issue;
     }
 
     public String getIssue_date() {
