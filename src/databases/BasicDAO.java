@@ -17,6 +17,11 @@ public abstract class BasicDAO<T> {
 
     protected BasicDAO(Connection connection) {
         this.connection = connection;
+        try (Statement st = connection.createStatement()) {
+            st.execute("PRAGMA foreign_keys = ON");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     protected abstract String tableName();

@@ -106,7 +106,7 @@ public class SQLiteService {
                     station_name TEXT NOT NULL CHECK(length(station_name) <= 20),                       -- 駅名
                     arrival_time TIME CHECK(arrival_time GLOB '[0-9][0-9]:[0-9][0-9]:[0-9][0-9]'),      -- 到着時刻
                     departure_time TIME CHECK(departure_time GLOB '[0-9][0-9]:[0-9][0-9]:[0-9][0-9]'),  -- 発車時刻
-                    platform TEXT NOT NULL CHECK(length(platform) <= 10),                               -- 発着ホーム
+                    platform TEXT CHECK(length(platform) <= 10),                               -- 発着ホーム
                     stop_type INTEGER NOT NULL CHECK(stop_type BETWEEN 0 AND 2),                        -- 停車区分
                     FOREIGN KEY (train_id) REFERENCES trains(ID) ON DELETE CASCADE ON UPDATE CASCADE);
                 """;
@@ -167,6 +167,43 @@ public class SQLiteService {
         stmt.execute(create_course_trains_table);
         stmt.execute(create_station_settings_table);
         stmt.execute(create_logs_table);
+
+        String insert_initial_data = """
+                INSERT INTO route_sections
+                    (position, name, letter, timetable_format_type, timetable_day_type, timetable_layout_type) VALUES
+                    (1,'外房線','外',1,0,1),
+                    (2,'東金線','東',1,0,3),
+                    (3,'京葉線二俣支線含む（土休日）','京',2,2,1),
+                    (4,'京葉線～高谷支線（土休日）','京',2,2,1),
+                    (5,'京葉線二俣支線含む（平日）','京',2,1,1),
+                    (6,'京葉線～高谷支線（平日）','京',2,1,1),
+                    (7,'京葉線','京',1,0,1),
+                    (8,'成田線 我孫子～成田','成',1,0,1),
+                    (9,'総武快速線（土休日）','総',2,2,1),
+                    (10,'総武快速線（平日）','総',2,1,1),
+                    (11,'総武緩行線 定期特急','総',1,0,1),
+                    (12,'総武快速線 定期特急','総',1,0,1),
+                    (13,'総武快速線 回送 東京～千葉','総',1,0,1),
+                    (14,'総武快速線 回送 幕張～千葉','総',1,0,3),
+                    (15,'総武・成田線 千葉～成田空港','総',1,0,2),
+                    (16,'総武本線 佐倉～銚子','総',1,0,1),
+                    (17,'成田線 成田～銚子','成',1,0,1),
+                    (18,'特急確定版用（緩行線）','特',1,0,1),
+                    (19,'特急確定版用（東京～千葉）','特',1,0,2),
+                    (20,'特急確定版用（千葉～空港）','特',1,0,1),
+                    (21,'特急確定版用（佐倉～銚子）','特',1,0,1),
+                    (22,'特急確定版用（東京～蘇我）','特',1,0,1),
+                    (23,'特急確定版用（蘇我～安房鴨川）','特',1,0,1),
+                    (24,'特急確定版用（蘇我～館山）','特',1,0,1),
+                    (25,'特急確定版用予定臨（緩行線）','特',1,0,1),
+                    (26,'特急確定版用予定臨（快速線）','特',1,0,1),
+                    (27,'特急確定版用予定臨（京葉線）','特',1,0,1),
+                    (28,'特急確定版用予定臨（外房線）','特',1,0,1),
+                    (29,'特急確定版用予定臨（内房線）','特',1,0,1),
+                    (30,'内房線','内',1,0,1),
+                    (31,'久留里線','久',1,0,1);
+                """;
+        stmt.executeUpdate(insert_initial_data);
 
     }
 

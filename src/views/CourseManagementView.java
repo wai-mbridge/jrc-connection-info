@@ -11,6 +11,7 @@ import java.util.List;
 import controllers.CourseManagementController;
 import databases.CourseDAO;
 import javafx.application.Platform;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -57,13 +58,36 @@ public class CourseManagementView {
         TableView<Course> tableView = new TableView<>();
         tableView.setPlaceholder(new Label("データがありません"));
 
-        TableColumn<Course, String> route_number_col = new TableColumn<>("行路番号");
-        route_number_col.setCellValueFactory(new PropertyValueFactory<>("route_number"));
-        route_number_col.setPrefWidth(70);
+        TableColumn<Course, String> course_number_col = new TableColumn<>("行路番号");
+        course_number_col.setCellValueFactory(new PropertyValueFactory<>("course_number"));
+        course_number_col.setPrefWidth(70);
+        course_number_col.setCellValueFactory(cellData -> {
 
-        TableColumn<Course, String> plan_name_col = new TableColumn<>("案名称");
-        plan_name_col.setCellValueFactory(new PropertyValueFactory<>("plan_name"));
-        plan_name_col.setPrefWidth(150);
+            Course course = cellData.getValue();
+            String course_number = course.getCourse_number();
+            if (course.getDay_code() != null) {
+                switch (course.getDay_code()) {
+                case "01":
+                    course_number = "平" + course_number;
+                    break;
+                case "11":
+                    course_number = "平平" + course_number;
+                    break;
+                case "04":
+                    course_number = "休" + course_number;
+                    break;
+                case "44":
+                    course_number = "休休" + course_number;
+                    break;
+                }
+            }
+
+            return new ReadOnlyStringWrapper(course_number);
+        });
+
+        TableColumn<Course, String> issue_col = new TableColumn<>("案名称");
+        issue_col.setCellValueFactory(new PropertyValueFactory<>("issue"));
+        issue_col.setPrefWidth(150);
 
         TableColumn<Course, String> issue_date_col = new TableColumn<>("発行日");
         issue_date_col.setCellValueFactory(new PropertyValueFactory<>("issue_date"));
@@ -73,11 +97,11 @@ public class CourseManagementView {
         uploaded_at_col.setCellValueFactory(new PropertyValueFactory<>("uploaded_at"));
         uploaded_at_col.setPrefWidth(140);
 
-        tableView.getColumns().addAll(List.of(route_number_col, plan_name_col, issue_date_col, uploaded_at_col));
+        tableView.getColumns().addAll(List.of(course_number_col, issue_col, issue_date_col, uploaded_at_col));
 
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
 
-        route_number_col.setCellFactory(col -> new TableCell<Course, String>() {
+        course_number_col.setCellFactory(col -> new TableCell<Course, String>() {
             private final Text text = new Text();
 
             {
@@ -118,7 +142,7 @@ public class CourseManagementView {
                 }
             }
         });
-        plan_name_col.setCellFactory(col -> new TableCell<Course, String>() {
+        issue_col.setCellFactory(col -> new TableCell<Course, String>() {
             private final Text text = new Text();
 
             {
