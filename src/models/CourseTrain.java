@@ -16,17 +16,12 @@ public class CourseTrain {
         super();
     }
 
-    public CourseTrain(int id, int course_id, int position, String train_number, int crew_type, String direct_from,
-            String direct_to, Course course) {
+    public CourseTrain(int course_id, int position, String train_number, int crew_type) {
         super();
-        this.id = id;
         this.course_id = course_id;
         this.position = position;
         this.train_number = train_number;
         this.crew_type = crew_type;
-        this.direct_from = direct_from;
-        this.direct_to = direct_to;
-        this.course = course;
     }
 
     public Course getCourse() {

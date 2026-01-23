@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Train {
@@ -36,6 +37,22 @@ public class Train {
         this.supplement = supplement;
         this.route_section = route_section;
         this.train_stations = train_stations;
+    }
+
+    public Train(Train other) {
+        this.route_section_id = other.route_section_id;
+        this.train_number = other.train_number;
+        this.bound_type = other.bound_type;
+        this.day_type = other.day_type;
+        this.train_type = other.train_type;
+        this.first_station = other.first_station;
+        this.last_station = other.last_station;
+        this.supplement = other.supplement;
+        this.route_section = other.route_section;
+        this.train_stations = new ArrayList<>();
+        for (TrainStation ts : other.train_stations) {
+            this.train_stations.add(new TrainStation(ts));
+        }
     }
 
     public RouteSection getRoute_section() {

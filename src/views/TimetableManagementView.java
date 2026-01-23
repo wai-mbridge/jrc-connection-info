@@ -8,10 +8,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 import controllers.TimetableManagementController;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
@@ -25,12 +27,12 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import models.RouteSection;
+import utils.AlertUtil;
 
 public class TimetableManagementView {
 
     private final Stage stage;
     private final Connection connection;
-    private TableView<RouteSection> tableView = new TableView<>();
 
     public TimetableManagementView(Stage stage, Connection connection) {
         this.stage = stage;
@@ -43,6 +45,8 @@ public class TimetableManagementView {
         stage.getIcons().add(icon);
 
         stage.setTitle("時刻表管理");
+
+        TableView<RouteSection> tableView = new TableView<>();
         tableView.setPlaceholder(new Label("データがありません"));
 
         TableColumn<RouteSection, String> name_col = new TableColumn<>("線区名");
@@ -91,17 +95,33 @@ public class TimetableManagementView {
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files (*.pdf)", "*.pdf"));
             List<File> selectedFiles = fileChooser.showOpenMultipleDialog(stage);
             if (selectedFiles != null && !selectedFiles.isEmpty()) {
-                for (File file : selectedFiles) {
+                import_btn.setDisable(true);
+                back_btn.setDisable(true);
+                progressIndicator.setVisible(true);
+                stage.getScene().setCursor(javafx.scene.Cursor.WAIT);
+
+                new Thread(() -> {
                     try {
-                        controller.extract(file);
+                        for (File file : selectedFiles) {
+                            controller.extract(file);
+                        }
+                        AlertUtil.showAlert("情報", "データベースに保存しました。", Alert.AlertType.INFORMATION);
                     } catch (IOException | SQLException e1) {
                         // TODO Auto-generated catch block
                         e1.printStackTrace();
-                    }
-                }
+                    } finally {
+                        Platform.runLater(() -> {
+                            progressIndicator.setVisible(false);
+                            import_btn.setDisable(false);
+                            back_btn.setDisable(false);
+                            stage.getScene().setCursor(javafx.scene.Cursor.DEFAULT);
 
-                // refresh
-                setData(controller.getAllDatas());
+                            // refresh table
+                            tableView.setItems(FXCollections.observableArrayList(controller.getAllDatas()));
+                        });
+                    }
+                }).start();
+
             }
 
         });
@@ -110,7 +130,7 @@ public class TimetableManagementView {
             controller.goBack();
         });
 
-        setData(controller.getAllDatas());
+        tableView.setItems(FXCollections.observableArrayList(controller.getAllDatas()));
 
         Scene scene = new Scene(stackPane, 500, 300);
         scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
@@ -119,7 +139,4 @@ public class TimetableManagementView {
 
     }
 
-    public void setData(List<RouteSection> data) {
-        tableView.setItems(FXCollections.observableArrayList(data));
-    }
 }

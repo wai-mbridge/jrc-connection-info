@@ -30,6 +30,15 @@ public class TrainStation {
         this.train = train;
     }
 
+    public TrainStation(TrainStation other) {
+        this.station_position = other.station_position;
+        this.station_name = other.station_name;
+        this.arrival_time = other.arrival_time;
+        this.departure_time = other.departure_time;
+        this.platform = other.platform;
+        this.stop_type = other.stop_type;
+    }
+
     public Train getTrain() {
         return train;
     }

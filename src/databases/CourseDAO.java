@@ -46,11 +46,11 @@ public class CourseDAO extends BasicDAO<Course> {
     }
 
     public List<Course> getAllWeekday() throws SQLException {
-        return findBy("weekday_holiday_type", "平日");
+        return findBy("day_type", 1);
     }
 
     public List<Course> getAllHoliday() throws SQLException {
-        return findBy("weekday_holiday_type", "休日");
+        return findBy("day_type", 2);
     }
 
 }

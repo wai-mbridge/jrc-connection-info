@@ -51,6 +51,43 @@ public class RouteSectionDAO extends BasicDAO<RouteSection> {
         return map;
     }
 
+    public RouteSection upsertByName(String name, Map<String, Object> route_section_data) throws SQLException {
+        RouteSection result = getDataByName(name);
+
+        if (result != null) {
+            update(result.getId(), route_section_data);
+            if (route_section_data.containsKey("timetable_version")) {
+                result.setTimetable_version(route_section_data.get("timetable_version").toString());
+            }
+            if (route_section_data.containsKey("timetable_updated")) {
+                result.setTimetable_updated(route_section_data.get("timetable_updated").toString());
+            }
+            if (route_section_data.containsKey("uploaded_at")) {
+                result.setUploaded_at(route_section_data.get("uploaded_at").toString());
+            }
+        } else {
+            // 例
+            result = new RouteSection();
+            result.setName(name);
+            result.setLetter(name.substring(0, 1));
+            result.setTimetable_format_type(1);
+            result.setTimetable_day_type(0);
+            result.setTimetable_layout_type(1);
+            if (route_section_data.containsKey("timetable_version")) {
+                result.setTimetable_version(route_section_data.get("timetable_version").toString());
+            }
+            if (route_section_data.containsKey("timetable_updated")) {
+                result.setTimetable_updated(route_section_data.get("timetable_updated").toString());
+            }
+            if (route_section_data.containsKey("uploaded_at")) {
+                result.setUploaded_at(route_section_data.get("uploaded_at").toString());
+            }
+            int id = insert(result);
+            result.setId(id);
+        }
+        return result;
+    }
+
     public RouteSection getWithTrains(int route_section_id) throws SQLException {
         RouteSection section = findById(route_section_id);
         if (section == null)
@@ -63,6 +100,11 @@ public class RouteSectionDAO extends BasicDAO<RouteSection> {
 
     public RouteSection getLastInsertedRecord() throws SQLException {
         List<RouteSection> list = query("SELECT * FROM " + tableName() + " ORDER BY uploaded_at DESC LIMIT 1");
+        return list.isEmpty() ? null : list.get(0);
+    }
+
+    public RouteSection getDataByName(String name) throws SQLException {
+        List<RouteSection> list = findBy("name", name);
         return list.isEmpty() ? null : list.get(0);
     }
 }
